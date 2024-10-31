@@ -35,4 +35,3 @@ public class Produto {
         this.tipo = tipo;
     }
 }
-
