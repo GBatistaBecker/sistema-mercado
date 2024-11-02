@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("resources/com.example.sistemamercado/hello-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("produto-controller.fxml"));
         primaryStage.setTitle("Supermercado");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();

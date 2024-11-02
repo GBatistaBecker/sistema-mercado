@@ -1,0 +1,28 @@
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.sistemamercado.pedido.PedidoController">
+    <TableView fx:id="productTable">
+        <columns>
+            <TableColumn fx:id="nameColumn" text="Produto" />
+            <TableColumn fx:id="priceColumn" text="Preço" />
+        </columns>
+    </TableView>
+
+    <Label text="Valor Total:" />
+    <Label fx:id="totalLabel" />
+
+    <Label text="Nome:" />
+    <TextField fx:id="nameField" />
+
+    <Label text="Endereço:" />
+    <TextField fx:id="addressField" />
+
+    <Label text="Telefone:" />
+    <TextField fx:id="phoneField" />
+
+    <Button text="Confirmar" onAction="#confirmarEntrega" />
+</VBox>

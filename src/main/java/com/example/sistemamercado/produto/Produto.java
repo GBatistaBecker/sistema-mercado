@@ -1,11 +1,15 @@
-package produto_Classe;
+package com.example.sistemamercado.produto;
 
 public class Produto {
     private String nome;
-    private double preco;
+    private Double preco;
     private String tipo;
 
-    public Produto(String nome, double preco, String tipo) {
+    public Produto() {
+
+    }
+
+    public Produto(String nome, Double preco, String tipo) {
         this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;
@@ -19,11 +23,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
@@ -33,5 +37,14 @@ public class Produto {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "nome='" + nome + '\'' +
+                ", preco=" + preco +
+                ", tipo='" + tipo + '\'' +
+                '}';
     }
 }
