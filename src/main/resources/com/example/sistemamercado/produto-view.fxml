@@ -31,7 +31,7 @@
     </HBox>
 
     <!-- Meio -->
-    <TableView fx:id="productTable"  onSort="#loadProducts" prefHeight="400">
+    <TableView fx:id="productTable" onSort="#loadProducts" prefHeight="400">
         <columns>
             <TableColumn fx:id="nameColumn" text="Nome" />
             <TableColumn fx:id="priceColumn" text="Preço" />

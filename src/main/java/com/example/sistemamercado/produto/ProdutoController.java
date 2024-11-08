@@ -23,8 +23,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 
-
-
 public class ProdutoController {
     @FXML
     private TextField searchField;
@@ -55,15 +53,13 @@ public class ProdutoController {
         // Atualiza o contador de itens no carrinho
         cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
 
-        // Ativa o botão de entrega se houver 20 ou mais itens no pedido
+        // Ativa o botão de entrega se houver 10 ou mais itens no pedido
         deliveryButton.setDisable(!pedido.podeSolicitarEntrega());
         cuidarEntrega();
     }
 
     @FXML
-    void selectedProduct(MouseEvent event) {
-
-    }
+    void selectedProduct(MouseEvent event) {}
 
     @FXML
     void filteredProducts(ActionEvent event) {
@@ -74,12 +70,10 @@ public class ProdutoController {
     }
 
     @FXML
-    void loadProducts(ActionEvent event) {
-    }
+    void loadProducts(ActionEvent event) {}
 
     @FXML
-    void updateFilteredProducts(ActionEvent event) {
-    }
+    void updateFilteredProducts(ActionEvent event) {}
 
     ProdutoDao produtoDao;
 
@@ -139,7 +133,6 @@ public class ProdutoController {
         atualizarCarrinho(); // Atualiza a exibição do carrinho
     }
 
-
     // Método para carregar produtos simulados
     private void loadProducts() {
         allProducts.addAll(produtoDao.listar());
@@ -170,15 +163,15 @@ public class ProdutoController {
         // Atualiza o contador de itens no carrinho
         cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
 
-        // Ativa o botão de entrega se houver 20 ou mais itens no pedido
-        deliveryButton.setDisable(!pedido.podeSolicitarEntrega());
+        // Ativa o botão de entrega se houver 10 ou mais itens no pedido
+        deliveryButton.setDisable(pedido.getQuantidadeTotal() < 3);
         cuidarEntrega();
     }
 
     // Ação para o botão de entrega
     @FXML
     private void cuidarEntrega() {
-        if (cart.size() >= 20) {
+        if (cart.size() >= 3) {
             // Aqui vai o código de processamento da entrega
             System.out.println("Entrega ativada para " + cart.size() + " itens.");
             try {
@@ -199,6 +192,4 @@ public class ProdutoController {
             }
         }
     }
-
-
 }

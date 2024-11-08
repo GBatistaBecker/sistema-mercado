@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -35,32 +36,27 @@ public class PedidoController {
     @FXML
     private Label totalLabel;
 
-    @FXML
-    void confirmarEntrega(ActionEvent event) {
-
-    }
-
-
     private Pedido pedido;
     private ObservableList<Produto> pedidos;
 
+    // Configura o pedido atual e inicializa a exibição dos produtos e valor total
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
         pedidos = FXCollections.observableArrayList(pedido.getListaDeProdutos());
         productTable.setItems(pedidos);
 
-        // Configurar colunas
+        // Configurar colunas da tabela de produtos
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNome()));
         priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPreco()).asObject());
-       // phoneField.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getTelefone()));
 
-        // Exibir o valor total
+        // Exibir o valor total dos produtos
         double total = pedido.getListaDeProdutos().stream().mapToDouble(Produto::getPreco).sum();
         totalLabel.setText(String.format("R$ %.2f", total));
     }
 
+    // Confirma a entrega após verificar campos obrigatórios
     @FXML
-    private void confirmarEntrega() {
+    private void confirmarEntrega(ActionEvent event) {
         String nome = nameField.getText();
         String endereco = addressField.getText();
         String telefone = phoneField.getText();
@@ -76,6 +72,7 @@ public class PedidoController {
         salvarPedidoNoBanco(nome, endereco, telefone);
     }
 
+    // Salva o pedido no banco de dados com os dados de contato e o valor total
     private void salvarPedidoNoBanco(String nome, String endereco, String telefone) {
         String sql = "INSERT INTO pedidos (nome, endereco, telefone, valor_total) VALUES (?, ?, ?, ?)";
 
