@@ -1,6 +1,8 @@
 package com.example.sistemamercado.produto;
 
 import com.example.sistemamercado.Database.ProdutoDao;
+import com.example.sistemamercado.Main;
+import com.example.sistemamercado.ProdutoApplication;
 import com.example.sistemamercado.config.FabricaDeConexao;
 import com.example.sistemamercado.pedido.Pedido;
 import com.example.sistemamercado.pedido.PedidoController;
@@ -15,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
@@ -24,6 +28,8 @@ import java.util.List;
 import java.util.logging.Level;
 
 public class ProdutoController {
+    private static final Logger logger = LoggerFactory.getLogger(ProdutoDao.class);
+
     @FXML
     private TextField searchField;
 
@@ -48,18 +54,25 @@ public class ProdutoController {
     @FXML
     private Button searchButton;
 
-    @FXML
-    void atualizarCarrinho(ActionEvent event) {
-        // Atualiza o contador de itens no carrinho
-        cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
+//    @FXML
+//    void atualizarCarrinho(ActionEvent event) {
+//        // Atualiza o contador de itens no carrinho
+//        cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
+//
+//        // Ativa o botão de entrega se houver 10 ou mais itens no pedido
+//        deliveryButton.setDisable(!pedido.podeSolicitarEntrega());
+//        cuidarEntrega();
+//    }
 
-        // Ativa o botão de entrega se houver 10 ou mais itens no pedido
-        deliveryButton.setDisable(!pedido.podeSolicitarEntrega());
-        cuidarEntrega();
-    }
-
-    @FXML
-    void selectedProduct(MouseEvent event) {}
+//    @FXML
+//    void selectedProduct(MouseEvent event) {
+//        // Atualiza o contador de itens no carrinho
+//        cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
+//
+//        // Ativa o botão de entrega se houver 10 ou mais itens no pedido
+//        deliveryButton.setDisable(pedido.getQuantidadeTotal() < 3);
+//        cuidarEntrega();
+//    }
 
     @FXML
     void filteredProducts(ActionEvent event) {
@@ -68,9 +81,6 @@ public class ProdutoController {
         filteredProducts.setAll(produtoList);
         updateFilteredProducts();
     }
-
-    @FXML
-    void loadProducts(ActionEvent event) {}
 
     @FXML
     void updateFilteredProducts(ActionEvent event) {}
@@ -106,7 +116,7 @@ public class ProdutoController {
         // Exibir produtos na tabela
         productTable.setItems(filteredProducts);
         updateFilteredProducts();
-        atualizarCarrinho();
+//        atualizarCarrinho();
 
         // Desativar botão de entrega inicialmente
         deliveryButton.setDisable(true);
@@ -123,6 +133,7 @@ public class ProdutoController {
                 }
             }
         });
+
     }
 
     private Pedido pedido = new Pedido(); // Instância do pedido
@@ -130,7 +141,7 @@ public class ProdutoController {
     // Método para adicionar o produto ao carrinho
     private void adicionarProdutoAoCarrinho(Produto produto) {
         pedido.adicionarProduto(produto); // Adiciona o produto ao pedido
-        atualizarCarrinho(); // Atualiza a exibição do carrinho
+        atualizarCarrinho(produto); // Atualiza a exibição do carrinho
     }
 
     // Método para carregar produtos simulados
@@ -152,20 +163,29 @@ public class ProdutoController {
         }));
     }
 
-    // Adiciona o produto ao carrinho e atualiza o contador e o botão de entrega
+//    // Adiciona o produto ao carrinho e atualiza o contador e o botão de entrega
+//    @FXML
+//    private void addCarrinho(Produto produto) {
+//        cart.add(produto);
+//        atualizarCarrinho();
+//    }
+
+
     @FXML
-    private void addCarrinho(Produto produto) {
-        cart.add(produto);
-        atualizarCarrinho();
+    void btnAtualizarCarrinho(ActionEvent event) {
+        logger.info("Clicou no botão Entregar");
+        cuidarEntrega();
     }
 
-    private void atualizarCarrinho() {
+    @FXML
+    private void atualizarCarrinho(Produto produto) {
         // Atualiza o contador de itens no carrinho
         cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
 
         // Ativa o botão de entrega se houver 10 ou mais itens no pedido
         deliveryButton.setDisable(pedido.getQuantidadeTotal() < 3);
-        cuidarEntrega();
+        cart.add(produto);
+//        cuidarEntrega();
     }
 
     // Ação para o botão de entrega
@@ -175,18 +195,27 @@ public class ProdutoController {
             // Aqui vai o código de processamento da entrega
             System.out.println("Entrega ativada para " + cart.size() + " itens.");
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("entrega-view.fxml"));
-                Parent root = loader.load();
+//                Parent parent = FXMLLoader.load(getClass().getResource("entrega-view.fxml"));
+//                Stage stage = new Stage();
+//                stage.setTitle("Detalhes de Entrega");
+//                Scene scene = new Scene(parent);
+//                stage.setScene(scene);
+//                stage.show();
 
-                // Configurar o controlador da nova janela
-                PedidoController pedidoController = loader.getController();
-                pedidoController.setPedido(pedido); // Enviar o pedido atual para o controlador
-
-                // Configurar e exibir a nova janela
+                Parent root = FXMLLoader.load(Main.class.getResource("entrega-view.fxml"));
                 Stage stage = new Stage();
                 stage.setTitle("Detalhes de Entrega");
-                stage.setScene(new Scene(root));
+                stage.setScene(new Scene(root, 600, 400));
                 stage.show();
+
+//                Parent root = loader.load();
+
+//                // Configurar o controlador da nova janela
+//                PedidoController PedidoController = loader.getController();
+//                PedidoController.setPedido(pedido); // Enviar o pedido atual para o controlador
+
+                // Configurar e exibir a nova janela
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

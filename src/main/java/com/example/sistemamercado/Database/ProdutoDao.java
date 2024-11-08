@@ -51,10 +51,10 @@ public class ProdutoDao {
 
                 produtos.add(produto);
             }
-            logger.info("Lista de técnicos recuperada com sucesso.");
+            logger.info("Lista de produtos recuperada com sucesso.");
 
         } catch (SQLException e) {
-            logger.error("Erro ao listar técnicos: {}", e.getMessage());
+            logger.error("Erro ao listar produtos: {}", e.getMessage());
         }
         return produtos;
     }

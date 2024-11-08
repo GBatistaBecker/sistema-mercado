@@ -31,7 +31,7 @@
     </HBox>
 
     <!-- Meio -->
-    <TableView fx:id="productTable" onSort="#loadProducts" prefHeight="400">
+    <TableView fx:id="productTable" prefHeight="400">
         <columns>
             <TableColumn fx:id="nameColumn" text="Nome" />
             <TableColumn fx:id="priceColumn" text="Preço" />
@@ -41,7 +41,7 @@
     <!-- Rodapé -->
     <HBox alignment="CENTER" spacing="10">
         <Label fx:id="cartCountLabel" text="Itens no Carrinho: 0 (mínimo 20 itens)" />
-        <Button fx:id="deliveryButton" disable="true" onAction="#atualizarCarrinho" text="Entregar" />
+        <Button fx:id="deliveryButton" disable="true" onAction="#btnAtualizarCarrinho" text="Entregar" />
     </HBox>
 
 </VBox>
