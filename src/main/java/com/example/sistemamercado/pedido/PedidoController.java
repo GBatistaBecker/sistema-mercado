@@ -8,7 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -75,33 +79,26 @@ public class PedidoController {
             alert.showAndWait();
             return;
         }
+        // Chama o popup de confirmação após salvar o pedido com sucesso
+        showConfirmationPopup();
 
-        salvarPedidoNoBanco(nome, endereco, telefone);
     }
 
-    // Salva o pedido no banco de dados com os dados de contato e o valor total
-    private void salvarPedidoNoBanco(String nome, String endereco, String telefone) {
-        String sql = "INSERT INTO pedidos (nome, endereco, telefone, valor_total) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = FabricaDeConexao.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            double total = pedido.getListaDeProdutos().stream().mapToDouble(Produto::getPreco).sum();
-
-            stmt.setString(1, nome);
-            stmt.setString(2, endereco);
-            stmt.setString(3, telefone);
-            stmt.setDouble(4, total);
-
-            stmt.executeUpdate();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Pedido Confirmado");
-            alert.setContentText("Pedido salvo com sucesso!");
-            alert.showAndWait();
-        } catch (SQLException e) {
+    // Método para mostrar o popup de confirmação
+    private void showConfirmationPopup() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sistemamercado/notificacao-entrega.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage popupStage = new Stage();
+            popupStage.setScene(new Scene(root, 300, 150));
+            popupStage.setTitle("Confirmação");
+            popupStage.show();
+        } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
-            alert.setContentText("Ocorreu um erro ao salvar o pedido.");
+            alert.setContentText("Não foi possível abrir o popup de confirmação.");
             alert.showAndWait();
         }
     }

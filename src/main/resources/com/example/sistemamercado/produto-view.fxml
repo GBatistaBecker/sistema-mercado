@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemamercado.produto.ProdutoController">
 
@@ -40,7 +41,10 @@
 
     <!-- Rodapé -->
     <HBox alignment="CENTER" spacing="10">
-        <Label fx:id="cartCountLabel" text="Itens no Carrinho: 0 (mínimo 20 itens)" />
+        <Label fx:id="cartCountLabel" text="Itens no Carrinho: 0 (mínimo 20 itens)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
         <Button fx:id="deliveryButton" disable="true" onAction="#btnAtualizarCarrinho" text="Entregar" />
     </HBox>
 

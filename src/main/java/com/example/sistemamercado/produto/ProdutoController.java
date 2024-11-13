@@ -184,14 +184,14 @@ public class ProdutoController {
         cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
 
         // Ativa o botão de entrega se houver 10 ou mais itens no pedido
-        deliveryButton.setDisable(pedido.getQuantidadeTotal() < 3);
+        deliveryButton.setDisable(pedido.getQuantidadeTotal() < 20);
         cart.add(produto);
 //        cuidarEntrega();
     }
 
     @FXML
     private void cuidarEntrega() {
-        if (cart.size() >= 3) {
+        if (cart.size() >= 20) {
             System.out.println("Entrega ativada para " + cart.size() + " itens.");
             try {
                 // Ajustar o caminho do FXML para o formato correto
@@ -214,7 +214,7 @@ public class ProdutoController {
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Quantidade Insuficiente");
-            alert.setContentText("É necessário ter pelo menos 3 itens no carrinho para ativar a entrega.");
+            alert.setContentText("É necessário ter pelo menos 20 itens no carrinho para ativar a entrega.");
             alert.showAndWait();
         }
     }
