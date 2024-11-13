@@ -1,6 +1,7 @@
 package com.example.sistemamercado.pedido;
 
 import com.example.sistemamercado.produto.Produto;
+import com.mysql.cj.jdbc.DatabaseMetaData;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,11 +11,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class PedidoController {
+
     @FXML
     private TextField addressField;
 
@@ -38,6 +39,7 @@ public class PedidoController {
 
     private Pedido pedido;
     private ObservableList<Produto> pedidos;
+    private DatabaseMetaData FabricaDeConexao;
 
     // Configura o pedido atual e inicializa a exibição dos produtos e valor total
     public void setPedido(Pedido pedido) {
@@ -50,6 +52,11 @@ public class PedidoController {
         priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPreco()).asObject());
 
         // Exibir o valor total dos produtos
+        atualizarTotal();
+    }
+
+    // Atualiza o valor total dos produtos na label
+    private void atualizarTotal() {
         double total = pedido.getListaDeProdutos().stream().mapToDouble(Produto::getPreco).sum();
         totalLabel.setText(String.format("R$ %.2f", total));
     }
@@ -76,7 +83,6 @@ public class PedidoController {
     private void salvarPedidoNoBanco(String nome, String endereco, String telefone) {
         String sql = "INSERT INTO pedidos (nome, endereco, telefone, valor_total) VALUES (?, ?, ?, ?)";
 
-        DatabaseMetaData FabricaDeConexao = null;
         try (Connection conn = FabricaDeConexao.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             double total = pedido.getListaDeProdutos().stream().mapToDouble(Produto::getPreco).sum();
 

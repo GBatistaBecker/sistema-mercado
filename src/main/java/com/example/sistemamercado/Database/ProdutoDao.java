@@ -59,7 +59,7 @@ public class ProdutoDao {
         return produtos;
     }
 
-//     Método para atualizar um técnico no banco de dados
+//     Método para atualizar um produto no banco de dados
         public boolean atualizar(Produto produto) {
            boolean isInserido = false; // Variável para armazenar o status da inserção
 
@@ -89,7 +89,7 @@ public class ProdutoDao {
             return isInserido;
         }
 //
-        // Método para excluir um técnico do banco de dados
+        // Método para excluir um produto do banco de dados
         public void excluir(Long id) {
             String sql = "DELETE FROM produto WHERE id = ?";
 
@@ -105,7 +105,7 @@ public class ProdutoDao {
             }
         }
 
-        // Método para buscar um técnico pelo ID
+        // Método para buscar um produto pelo ID
         public Produto buscarPorId(Long id) {
             Produto produto = null;
             String sql = "SELECT nome, preco, tipo FROM produtos WHERE id = ?";

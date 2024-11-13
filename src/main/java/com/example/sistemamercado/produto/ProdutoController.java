@@ -83,7 +83,8 @@ public class ProdutoController {
     }
 
     @FXML
-    void updateFilteredProducts(ActionEvent event) {}
+    void updateFilteredProducts(ActionEvent event) {
+    }
 
     ProdutoDao produtoDao;
 
@@ -188,37 +189,34 @@ public class ProdutoController {
 //        cuidarEntrega();
     }
 
-    // Ação para o botão de entrega
     @FXML
     private void cuidarEntrega() {
         if (cart.size() >= 3) {
-            // Aqui vai o código de processamento da entrega
             System.out.println("Entrega ativada para " + cart.size() + " itens.");
             try {
-//                Parent parent = FXMLLoader.load(getClass().getResource("entrega-view.fxml"));
-//                Stage stage = new Stage();
-//                stage.setTitle("Detalhes de Entrega");
-//                Scene scene = new Scene(parent);
-//                stage.setScene(scene);
-//                stage.show();
+                // Ajustar o caminho do FXML para o formato correto
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("/com/example/sistemamercado/entrega-view.fxml"));
+                Parent root = loader.load();
 
-                Parent root = FXMLLoader.load(Main.class.getResource("entrega-view.fxml"));
+                // Configurar o controlador da nova janela
+                PedidoController pedidoController = loader.getController();
+                pedidoController.setPedido(pedido); // Passa o pedido atual para o controlador
+
+                // Configurar e exibir a nova janela de entrega
                 Stage stage = new Stage();
                 stage.setTitle("Detalhes de Entrega");
                 stage.setScene(new Scene(root, 600, 400));
                 stage.show();
 
-//                Parent root = loader.load();
-
-//                // Configurar o controlador da nova janela
-//                PedidoController PedidoController = loader.getController();
-//                PedidoController.setPedido(pedido); // Enviar o pedido atual para o controlador
-
-                // Configurar e exibir a nova janela
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Quantidade Insuficiente");
+            alert.setContentText("É necessário ter pelo menos 3 itens no carrinho para ativar a entrega.");
+            alert.showAndWait();
         }
     }
 }
+

@@ -4,6 +4,7 @@ module com.example.sistemamercado {
     requires java.sql;
     requires org.slf4j;
     requires com.zaxxer.hikari;
+    requires mysql.connector.j;
 
     opens com.example.sistemamercado to javafx.fxml;
     opens com.example.sistemamercado.produto to javafx.fxml;
