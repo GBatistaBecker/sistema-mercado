@@ -166,8 +166,28 @@ public class ProdutoDao {
     public static void main(String[] args) {
         ProdutoDao produtoDao = new ProdutoDao();
         produtoDao.insertProduct(new Produto("Morango", 11.00, "Horti-fruti"));
-        produtoDao.insertProduct(new Produto("Cerveja", 3.75, "Bebidas"));
+        produtoDao.insertProduct(new Produto("Cerveja Brahma", 3.75, "Bebidas"));
         produtoDao.insertProduct(new Produto("Castanha do Pará",50.00, "Sem glúten"));
-        produtoDao.insertProduct(new Produto("Talco", 15.00, "Higiene"));
+        produtoDao.insertProduct(new Produto("Trufa Divine", 35.00, "Sem glúten"));
+        produtoDao.insertProduct(new Produto("Cachaça Velho Barreiro",13.00 , "Bebidas"));
+        produtoDao.insertProduct(new Produto("Limão", 6.00, "Horti-fruti"));
+        produtoDao.insertProduct(new Produto("Neve", 12.00, "Higiene"));
+        produtoDao.insertProduct(new Produto("Pasta de dente Sensodyne", 15.00, "Higiene"));
+        produtoDao.insertProduct(new Produto("Pão de sanduíche", 10.00, "Sem glúten"));
+        produtoDao.insertProduct(new Produto("Whisky Johnny Walker", 120.00, "Bebidas"));
+        produtoDao.insertProduct(new Produto("Mamão", 8.00, "Horti-fruti"));
+        produtoDao.insertProduct(new Produto("Vinho Casillero Del Diablo", 50.00, "Bebidas"));
+        produtoDao.insertProduct(new Produto("Pasta de dente Sorriso", 7.00, "Higiene"));
+        produtoDao.insertProduct(new Produto("Shampoo Clear Man anticaspa", 12.00, "Higiene"));
+        produtoDao.insertProduct(new Produto("Talco Johnson & Johnson", 10.00, "Higiene"));
+        produtoDao.insertProduct(new Produto("Bergamota", 2.00, "Horti-fruti"));
+        produtoDao.insertProduct(new Produto("Macarrão Caseiro Nona Franca", 25.00, "Sem glúten"));
+        produtoDao.insertProduct(new Produto("Absorvente Always", 6.00, "Higiene"));
+        produtoDao.insertProduct(new Produto("Vinho Cambruzzi", 60.00, "Bebidas"));
+        produtoDao.insertProduct(new Produto("Banana", 4.00, "Horti-fruti"));
+        produtoDao.insertProduct(new Produto("Energético Red Bull", 11.00, "Bebidas"));
+        produtoDao.insertProduct(new Produto("Coca-Cola", 13.00, "Bebidas"));
+        produtoDao.insertProduct(new Produto("Fanta uva", 10.00, "Bebidas"));
+        produtoDao.insertProduct(new Produto("Melancia inteira", 25.00, "Horti-fruti"));
     }
 }

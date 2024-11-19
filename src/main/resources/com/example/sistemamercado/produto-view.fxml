@@ -32,7 +32,7 @@
     </HBox>
 
     <!-- Meio -->
-    <TableView fx:id="productTable" prefHeight="400">
+    <TableView fx:id="productTable">
         <columns>
             <TableColumn fx:id="nameColumn" text="Nome" />
             <TableColumn fx:id="priceColumn" text="Preço" />

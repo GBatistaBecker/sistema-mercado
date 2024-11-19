@@ -54,26 +54,6 @@ public class ProdutoController {
     @FXML
     private Button searchButton;
 
-//    @FXML
-//    void atualizarCarrinho(ActionEvent event) {
-//        // Atualiza o contador de itens no carrinho
-//        cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
-//
-//        // Ativa o botão de entrega se houver 10 ou mais itens no pedido
-//        deliveryButton.setDisable(!pedido.podeSolicitarEntrega());
-//        cuidarEntrega();
-//    }
-
-//    @FXML
-//    void selectedProduct(MouseEvent event) {
-//        // Atualiza o contador de itens no carrinho
-//        cartCountLabel.setText("Itens no Carrinho: " + pedido.getQuantidadeTotal());
-//
-//        // Ativa o botão de entrega se houver 10 ou mais itens no pedido
-//        deliveryButton.setDisable(pedido.getQuantidadeTotal() < 3);
-//        cuidarEntrega();
-//    }
-
     @FXML
     void filteredProducts(ActionEvent event) {
         String value = preferenceComboBox.getValue();
@@ -164,14 +144,6 @@ public class ProdutoController {
         }));
     }
 
-//    // Adiciona o produto ao carrinho e atualiza o contador e o botão de entrega
-//    @FXML
-//    private void addCarrinho(Produto produto) {
-//        cart.add(produto);
-//        atualizarCarrinho();
-//    }
-
-
     @FXML
     void btnAtualizarCarrinho(ActionEvent event) {
         logger.info("Clicou no botão Entregar");
@@ -207,6 +179,7 @@ public class ProdutoController {
                 stage.setTitle("Detalhes de Entrega");
                 stage.setScene(new Scene(root, 600, 400));
                 stage.show();
+
 
             } catch (IOException e) {
                 e.printStackTrace();
