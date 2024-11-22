@@ -44,10 +44,10 @@ public class FabricaDeConexao {
         config.setJdbcUrl("jdbc:mysql://localhost:3306/supermercado");
         config.setUsername("root");
         config.setPassword("Root");
-        config.setMaximumPoolSize(10); // Máximo de conexões simultâneas
-        config.setMinimumIdle(2); // Número mínimo de conexões ociosas
-        config.setIdleTimeout(30000); // Tempo ocioso antes de fechar uma conexão
-        config.setMaxLifetime(1800000); // Tempo máximo de vida para cada conexão
+        config.setMaximumPoolSize(10);
+        config.setMinimumIdle(2);
+        config.setIdleTimeout(30000);
+        config.setMaxLifetime(1800000);
 
         dataSource = new HikariDataSource(config);
     }

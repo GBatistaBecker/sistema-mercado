@@ -14,10 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public class PedidoController {
 
     @FXML
@@ -45,13 +41,13 @@ public class PedidoController {
     private ObservableList<Produto> pedidos;
     private DatabaseMetaData FabricaDeConexao;
 
-    // Configura o pedido atual e inicializa a exibição dos produtos e valor total
+
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
         pedidos = FXCollections.observableArrayList(pedido.getListaDeProdutos());
         productTable.setItems(pedidos);
 
-        // Configurar colunas da tabela de produtos
+
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNome()));
         priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPreco()).asObject());
 
@@ -80,13 +76,13 @@ public class PedidoController {
             return;
         }
         // Chama o popup de confirmação após salvar o pedido com sucesso
-        showConfirmationPopup();
+        mostrarPopup();
 
     }
 
 
     // Método para mostrar o popup de confirmação
-    private void showConfirmationPopup() {
+    private void mostrarPopup() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sistemamercado/notificacao-entrega.fxml"));
             Parent root = fxmlLoader.load();

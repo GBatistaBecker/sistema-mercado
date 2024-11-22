@@ -3,7 +3,6 @@ package com.example.sistemamercado.Database;
 import com.example.sistemamercado.config.FabricaDeConexao;
 
 import com.example.sistemamercado.produto.Produto;
-import javafx.collections.FXCollections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,79 +57,6 @@ public class ProdutoDao {
         }
         return produtos;
     }
-
-//     Método para atualizar um produto no banco de dados
-        public boolean atualizar(Produto produto) {
-           boolean isInserido = false; // Variável para armazenar o status da inserção
-
-            if (produto.getTipo() == null) {
-                logger.warn("ID do técnico não pode ser nulo. Atualização não realizada.");
-                throw new IllegalArgumentException("ID do técnico não pode ser nulo.");
-            }
-
-            String sql = "UPDATE tecnico SET nome = ?, preco = ?, tipo = ?,  WHERE id = ?";
-
-            try (Connection conexao = FabricaDeConexao.obterConexao();
-                 PreparedStatement statement = conexao.prepareStatement(sql)) {
-
-                statement.setString(1, produto.getNome());
-                statement.setDouble(2, produto.getPreco());
-                statement.setString(3, produto.getTipo());
-
-                int linhasAfetadas = statement.executeUpdate();
-                if (linhasAfetadas > 0) {
-                    isInserido = true; // A atualização foi bem-sucedida
-                    logger.info("Produto atualizado com sucesso: {}", produto.getTipo());
-                }
-
-            } catch (SQLException e) {
-                logger.error("Erro ao atualizar produto: {}", e.getMessage());
-            }
-            return isInserido;
-        }
-//
-        // Método para excluir um produto do banco de dados
-        public void excluir(Long id) {
-            String sql = "DELETE FROM produto WHERE id = ?";
-
-            try (Connection conexao = FabricaDeConexao.obterConexao();
-                 PreparedStatement statement = conexao.prepareStatement(sql)) {
-
-                statement.setLong(1, id);
-                statement.executeUpdate();
-                logger.info("Produto excluído com sucesso: {}", id);
-
-            } catch (SQLException e) {
-                logger.error("Erro ao excluir produto: {}", e.getMessage());
-            }
-        }
-
-        // Método para buscar um produto pelo ID
-        public Produto buscarPorId(Long id) {
-            Produto produto = null;
-            String sql = "SELECT nome, preco, tipo FROM produtos WHERE id = ?";
-
-            try (Connection conexao = FabricaDeConexao.obterConexao();
-                 PreparedStatement statement = conexao.prepareStatement(sql)) {
-
-                statement.setLong(1, id);
-                ResultSet resultado = statement.executeQuery();
-
-                if (resultado.next()) {
-                    produto = new Produto();
-                    produto.setNome(resultado.getString("nome"));
-                    produto.setPreco(resultado.getDouble("preco"));
-                    produto.setTipo(resultado.getString("tipo"));
-                    logger.info("Produto encontrado: {}", produto.getNome());
-                } else {
-                    logger.warn("Nenhum produto encontrado com o ID: {}", id);
-                }
-
-            } catch (SQLException e) {
-                logger.error("Erro ao buscar produto por ID: {}", e.getMessage());
-            }
-            return produto;
-        }
 
     public List<Produto> buscarPorTipo(String tipo) {
 

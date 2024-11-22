@@ -2,8 +2,6 @@ package com.example.sistemamercado.produto;
 
 import com.example.sistemamercado.Database.ProdutoDao;
 import com.example.sistemamercado.Main;
-import com.example.sistemamercado.ProdutoApplication;
-import com.example.sistemamercado.config.FabricaDeConexao;
 import com.example.sistemamercado.pedido.Pedido;
 import com.example.sistemamercado.pedido.PedidoController;
 import javafx.beans.property.SimpleDoubleProperty;
